@@ -133,26 +133,29 @@ export default function Home({ match }) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    dispatch(setforceReload3());
 
-    async function add() {
-      const arrayToUpdate = firebase.firestore.FieldValue.arrayUnion({
-        text: input,
-        createdAt: Date.now(),
-        name: name,
-      });
-      if (db) {
-        await db.collection(collection).doc(document_id).set(
-          {
-            reply: arrayToUpdate,
-          },
-          { merge: true }
-        );
+    if (input !== "") {
+      dispatch(setforceReload3());
 
-        setInput("");
+      async function add() {
+        const arrayToUpdate = firebase.firestore.FieldValue.arrayUnion({
+          text: input,
+          createdAt: Date.now(),
+          name: name,
+        });
+        if (db) {
+          await db.collection(collection).doc(document_id).set(
+            {
+              reply: arrayToUpdate,
+            },
+            { merge: true }
+          );
+
+          setInput("");
+        }
       }
+      add();
     }
-    add();
   };
   const theme = createTheme({
     palette: {
@@ -182,13 +185,13 @@ export default function Home({ match }) {
           textAlign: "center",
           fontFamily: "Signika",
           backgroundColor: "#125845",
-          fontSize:18,
+          fontSize: 18,
           paddingLeft: 20,
           paddingRight: 20,
           paddingTop: 5,
           paddingBottom: 5,
-          marginTop:0,
-          width:"100%",
+          marginTop: 0,
+          width: "100%",
         }}
       >
         {collection}
@@ -209,14 +212,14 @@ export default function Home({ match }) {
       <Container
         style={{
           marginBottom: 0,
-          marginTop:"2vh",
+          marginTop: "2vh",
           display: "block",
           justifyContent: "center",
           alignContent: "center",
           maxWidth: "90vw",
           padding: 2,
-          backgroundColor:"#303030",
-          borderRadius:6,
+          backgroundColor: "#303030",
+          borderRadius: 6,
         }}
         component="main"
       >
@@ -267,7 +270,7 @@ export default function Home({ match }) {
                   right: 15,
                 }}
               >
-                {console.log("createdAt: ",qCreatedAt)}
+                {console.log("createdAt: ", qCreatedAt)}
                 {new Date(parseInt(qCreatedAt)).toLocaleTimeString([], {
                   year: "numeric",
                   month: "numeric",
@@ -289,46 +292,48 @@ export default function Home({ match }) {
             alignContent: "center",
           }}
         >
-          <div style={{
-            display:"flex",
-            flexDirection:"row",
-            width:"90vw",
-            position:"absolute",
-            bottom:10
-          }}>
-          <div style={{ width: "100%" }}>
-            <ThemeProvider theme={theme}>
-              <TextField
-                InputProps={{
-                  className: classes.textField,
-                }}
-                variant="outlined"
-                required
-                fullWidth
-                value={input}
-                id="mInput"
-                label="Reply"
-                name="input"
-                size="small"
-                onKeyPress={(ev) => {
-                  console.log(`Pressed keyCode ${ev.key}`);
-                  if (ev.key === "Enter") {
-                    ev.preventDefault();
-                    handleOnSubmit(ev);
-                  }
-                }}
-                onChange={(e) => setInput(e.target.value)}
-              />
-            </ThemeProvider>
-          </div>
-          <div>
-            <Button
-              variant="contained"
-              style={{ height: 40, paddingLeft: 30 }}
-              startIcon={<SendIcon />}
-              onClick={handleOnSubmit}
-            ></Button>
-          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "90vw",
+              position: "absolute",
+              bottom: 10,
+            }}
+          >
+            <div style={{ width: "100%" }}>
+              <ThemeProvider theme={theme}>
+                <TextField
+                  InputProps={{
+                    className: classes.textField,
+                  }}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  value={input}
+                  id="mInput"
+                  label="Reply"
+                  name="input"
+                  size="small"
+                  onKeyPress={(ev) => {
+                    console.log(`Pressed keyCode ${ev.key}`);
+                    if (ev.key === "Enter") {
+                      ev.preventDefault();
+                      handleOnSubmit(ev);
+                    }
+                  }}
+                  onChange={(e) => setInput(e.target.value)}
+                />
+              </ThemeProvider>
+            </div>
+            <div>
+              <Button
+                variant="contained"
+                style={{ height: 40, paddingLeft: 30 }}
+                startIcon={<SendIcon />}
+                onClick={handleOnSubmit}
+              ></Button>
+            </div>
           </div>
           {/* <CustomizedSnackbars onCloseEvent={onSnackbarClose} open={snackbarSuccessText.length > 0} text="Sent" />
                     <CustomizedSnackbars onCloseEvent={onSnackbarClose} open={snackbarErrorText.length > 0} error text={snackbarErrorText} /> */}

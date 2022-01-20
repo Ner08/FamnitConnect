@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
   facultyClass: {
     fontSize: 14,
     fontFamily: "Signika",
-    color:'white',
+    color: "white",
   },
   textField: {
     backgroundColor: "white",
@@ -146,18 +146,20 @@ export default function Home({ match }) {
     // }
     // getSubjectsData();
 
-    async function add() {
-      if (db) {
-        await db.collection(subjectName).add({
-          text: input,
-          createdAt: Date.now(),
-          name: name,
-          reply: {},
-        });
-        setInput("");
+    if (input !== "") {
+      async function add() {
+        if (db) {
+          await db.collection(subjectName).add({
+            text: input,
+            createdAt: Date.now(),
+            name: name,
+            reply: {},
+          });
+          setInput("");
+        }
       }
+      add();
     }
-    add();
   };
   const theme = createTheme({
     palette: {
@@ -218,14 +220,16 @@ export default function Home({ match }) {
             alignContent: "center",
           }}
         >
-          <div style={{
-            display: "flex",
-            flexDirection:"row",
-            width: "55vw",
-            padding:2,
-            justifyContent: "center",
-            alignContent: "center",
-          }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "55vw",
+              padding: 2,
+              justifyContent: "center",
+              alignContent: "center",
+            }}
+          >
             <div style={{ width: "100%" }}>
               <ThemeProvider theme={theme}>
                 <TextField

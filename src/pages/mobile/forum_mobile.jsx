@@ -12,7 +12,7 @@ import "firebase/compat/firestore";
 import Channel from "../../utils/messagesChannelMobile";
 import SendIcon from "@mui/icons-material/Send";
 import Paper from "@mui/material/Paper";
-import { useParams } from 'react-router';
+import { useParams } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -117,8 +117,7 @@ export default function Home({ match }) {
   const [input, setInput] = React.useState("");
   const name = useSelector((state) => state.setNickname);
 
-  const {subjectName} = useParams();
-
+  const { subjectName } = useParams();
 
   // const source = axios.CancelToken.source();
 
@@ -143,18 +142,20 @@ export default function Home({ match }) {
     // }
     // getSubjectsData();
 
-    async function add() {
-      if (db) {
-        await db.collection(subjectName).add({
-          text: input,
-          createdAt: Date.now(),
-          name: name,
-          reply: {},
-        });
-        setInput("");
+    if (input !== "") {
+      async function add() {
+        if (db) {
+          await db.collection(subjectName).add({
+            text: input,
+            createdAt: Date.now(),
+            name: name,
+            reply: {},
+          });
+          setInput("");
+        }
       }
+      add();
     }
-    add();
   };
   const theme = createTheme({
     palette: {
@@ -172,7 +173,7 @@ export default function Home({ match }) {
       style={{
         width: "100%",
         marginTop: 0,
-        margin:"auto"
+        margin: "auto",
       }}
     >
       <CssBaseline />
@@ -183,13 +184,13 @@ export default function Home({ match }) {
           textAlign: "center",
           fontFamily: "Signika",
           backgroundColor: "#125845",
-          fontSize:18,
+          fontSize: 18,
           paddingLeft: 20,
           paddingRight: 20,
           paddingTop: 5,
           paddingBottom: 5,
-          marginTop:0,
-          width:"100%",
+          marginTop: 0,
+          width: "100%",
         }}
       >
         {subjectName}
@@ -215,47 +216,49 @@ export default function Home({ match }) {
             alignContent: "center",
           }}
         >
-          <div style={{
-            display:"flex",
-            flexDirection:"row",
-            width:"90vw",
-            position:"absolute",
-            bottom:10
-          }}>
-          <div style={{ width: "100%" }}>
-            <ThemeProvider theme={theme}>
-              <TextField
-                InputProps={{
-                  className: classes.textField,
-                }}
-                variant="outlined"
-                required
-                fullWidth
-                value={input}
-                id="mInput"
-                label="Question"
-                name="input"
-                size="small"
-                style={{height:10}}
-                onKeyPress={(ev) => {
-                  console.log(`Pressed keyCode ${ev.key}`);
-                  if (ev.key === "Enter") {
-                    ev.preventDefault();
-                    handleOnSubmit(ev);
-                  }
-                }}
-                onChange={(e) => setInput(e.target.value)}
-              />
-            </ThemeProvider>
-          </div>
-          <div>
-            <Button
-              variant="contained"
-              style={{ height: 40, paddingLeft: 30 }}
-              startIcon={<SendIcon />}
-              onClick={handleOnSubmit}
-            ></Button>
-          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "90vw",
+              position: "absolute",
+              bottom: 10,
+            }}
+          >
+            <div style={{ width: "100%" }}>
+              <ThemeProvider theme={theme}>
+                <TextField
+                  InputProps={{
+                    className: classes.textField,
+                  }}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  value={input}
+                  id="mInput"
+                  label="Question"
+                  name="input"
+                  size="small"
+                  style={{ height: 10 }}
+                  onKeyPress={(ev) => {
+                    console.log(`Pressed keyCode ${ev.key}`);
+                    if (ev.key === "Enter") {
+                      ev.preventDefault();
+                      handleOnSubmit(ev);
+                    }
+                  }}
+                  onChange={(e) => setInput(e.target.value)}
+                />
+              </ThemeProvider>
+            </div>
+            <div>
+              <Button
+                variant="contained"
+                style={{ height: 40, paddingLeft: 30 }}
+                startIcon={<SendIcon />}
+                onClick={handleOnSubmit}
+              ></Button>
+            </div>
           </div>
           {/* <CustomizedSnackbars onCloseEvent={onSnackbarClose} open={snackbarSuccessText.length > 0} text="Sent" />
                     <CustomizedSnackbars onCloseEvent={onSnackbarClose} open={snackbarErrorText.length > 0} error text={snackbarErrorText} /> */}
