@@ -1,4 +1,4 @@
-const googleMail = (state = "robic.nejc12@gmail.com", action) => {
+const googleMail = (state = null, action) => {
   switch (action.type) {
     case "NEW_EMAIL":
       return action.email;
