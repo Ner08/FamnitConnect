@@ -3,24 +3,19 @@
   "name": "FamnitConnect",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "tab-icon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "android-icon-96x96.png",
-      "type": "image/png",
-      "sizes": "96x96"
-    },
-    {
-      "src": "android-icon-192x192.png",
+      "src": "aandroid-chrome-192x192",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "ms-icon-310x310.png",
+      "src": "android-chrome-192x192",
       "type": "image/png",
-      "sizes": "310x310"
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
