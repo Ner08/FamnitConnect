@@ -1,0 +1,67 @@
+{
+  "name": "famnit_connect",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@devexpress/dx-react-core": "^2.7.6",
+    "@devexpress/dx-react-scheduler": "^2.7.6",
+    "@devexpress/dx-react-scheduler-material-ui": "^2.7.6",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@mui/base": "^5.0.0-alpha.63",
+    "@mui/core": "^5.0.0-alpha.54",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/material": "^5.2.7",
+    "@mui/system": "^5.2.6",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.2",
+    "axios-cancel": "^0.2.2",
+    "firebase": "^9.6.2",
+    "firestore": "^1.1.6",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.34",
+    "mui": "0.0.1",
+    "react": "^16.14.0",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-custom-scrollbars-2": "^4.4.0",
+    "react-device-detect": "^2.1.2",
+    "react-dom": "^16.14.0",
+    "react-firebase-hooks": "^4.0.1",
+    "react-google-login": "^5.2.2",
+    "react-moment": "^0.9.7",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "3.4.0",
+    "reactstrap": "^8.10.1",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
+    "simplebar-react": "^2.3.6"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
