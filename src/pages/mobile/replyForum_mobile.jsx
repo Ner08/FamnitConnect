@@ -15,7 +15,6 @@ import Paper from "@mui/material/Paper";
 import { useDispatch } from "react-redux";
 import { setforceReload3 } from "../../redux/actions";
 import { Typography, Container } from "@material-ui/core";
-import Snackbar from "@material-ui/core/Snackbar";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 
@@ -119,8 +118,6 @@ const db = firebase.firestore();
 
 export default function Home({ match }) {
   const classes = useStyles();
-  const [snackbarSuccessText, setSnackbarSuccessText] = React.useState("");
-  const [snackbarErrorText, setSnackbarErrorText] = React.useState("");
   const [input, setInput] = React.useState("");
   const name = useSelector((state) => state.setNickname);
   const dispatch = useDispatch();

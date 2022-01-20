@@ -27,7 +27,6 @@ import {
   setforceReload4,
   setDrawerStatus,
   setDrawerStatusSettings,
-  setSettingsOpen,
   setLoading,
   setSnackbarOpen,
   setId,

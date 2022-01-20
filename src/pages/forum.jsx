@@ -12,9 +12,7 @@ import "firebase/compat/firestore";
 import Channel from "../utils/messagesChannel.jsx";
 import SendIcon from "@mui/icons-material/Send";
 import Paper from "@mui/material/Paper";
-import { useParams } from 'react-router';
-
-import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,7 +90,11 @@ const useStyles = makeStyles((theme) => ({
     width: 320,
     borderRadius: 4,
   },
-
+  facultyClass: {
+    fontSize: 14,
+    fontFamily: "Signika",
+    color:'white',
+  },
   textField: {
     backgroundColor: "white",
     color: "black",
@@ -116,17 +118,10 @@ const db = firebase.firestore();
 
 export default function Home({ match }) {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const [snackbarSuccessText, setSnackbarSuccessText] = React.useState("");
-  const [snackbarErrorText, setSnackbarErrorText] = React.useState("");
   const [input, setInput] = React.useState("");
   const name = useSelector((state) => state.setNickname);
-  const uuid = useSelector((state) => state.setUuid);
-  const reload = useSelector((state) => state.forceReload4);
-  const [value, setValue] = React.useState(true);
 
-  const {subjectName} = useParams();
-
+  const { subjectName } = useParams();
 
   // const source = axios.CancelToken.source();
 
@@ -223,40 +218,48 @@ export default function Home({ match }) {
             alignContent: "center",
           }}
         >
-          <div style={{ width: "55%" }}>
-            <ThemeProvider theme={theme}>
-              <TextField
-                InputProps={{
-                  className: classes.textField,
-                }}
-                variant="outlined"
-                required
-                fullWidth
-                value={input}
-                id="mInput"
-                label="Question"
-                name="input"
-                size="small"
-                onKeyPress={(ev) => {
-                  console.log(`Pressed keyCode ${ev.key}`);
-                  if (ev.key === "Enter") {
-                    ev.preventDefault();
-                    handleOnSubmit(ev);
-                  }
-                }}
-                onChange={(e) => setInput(e.target.value)}
-              />
-            </ThemeProvider>
+          <div style={{
+            display: "flex",
+            flexDirection:"row",
+            width: "55vw",
+            padding:2,
+            justifyContent: "center",
+            alignContent: "center",
+          }}>
+            <div style={{ width: "100%" }}>
+              <ThemeProvider theme={theme}>
+                <TextField
+                  InputProps={{
+                    className: classes.textField,
+                  }}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  value={input}
+                  id="mInput"
+                  label="Question"
+                  name="input"
+                  size="small"
+                  onKeyPress={(ev) => {
+                    console.log(`Pressed keyCode ${ev.key}`);
+                    if (ev.key === "Enter") {
+                      ev.preventDefault();
+                      handleOnSubmit(ev);
+                    }
+                  }}
+                  onChange={(e) => setInput(e.target.value)}
+                />
+              </ThemeProvider>
+            </div>
+            <div>
+              <Button
+                variant="contained"
+                style={{ height: 40, paddingLeft: 30 }}
+                startIcon={<SendIcon />}
+                onClick={handleOnSubmit}
+              ></Button>
+            </div>
           </div>
-          <div>
-            <Button
-              variant="contained"
-              style={{ height: 40, paddingLeft: 30 }}
-              startIcon={<SendIcon />}
-              onClick={handleOnSubmit}
-            ></Button>
-          </div>
-
           {/* <CustomizedSnackbars onCloseEvent={onSnackbarClose} open={snackbarSuccessText.length > 0} text="Sent" />
                     <CustomizedSnackbars onCloseEvent={onSnackbarClose} open={snackbarErrorText.length > 0} error text={snackbarErrorText} /> */}
         </div>

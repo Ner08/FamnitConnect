@@ -1,7 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState} from "react";
 import { Typography, Container } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import CustomizedSnackbars from "../components/snackbar";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
@@ -9,47 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Scrollbars from "react-custom-scrollbars";
 import { useSelector } from "react-redux";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    height: "100%",
-    marginTop: 50,
-  },
-  form: {
-    position: "static",
-    bottom: 0,
-    marginLeft: 20,
-    justifyContent: "center",
-    width: "100%",
-    color: "white",
-    marginBottom: 2,
-    marginTop: 2,
-  },
-  textField: {
-    backgroundColor: "white",
-    color: "black",
-  },
-  text: {
-    marginTop: 40,
-    marginBottom: 40,
-    color: "white",
-    textAlign: "center",
-    fontSize: 14,
-    fontFamily: "Signika",
-  },
-  textVarify: {
-    marginTop: 10,
-    color: "white",
-    textAlign: "center",
-    fontSize: 24,
-    fontFamily: "Signika",
-    marginBottom: 20,
-  },
-}));
-
 const ReplyChannel = ({ db, name, document_id, collection }) => {
-  const classes = useStyles();
-  const [messages, setMessages] = useState([]);
   const [replies, setReplies] = useState([]);
   const forceReload = useSelector((state) => state.forceReload3);
 
@@ -213,7 +171,7 @@ const ReplyChannel = ({ db, name, document_id, collection }) => {
           console.log("Error getting document:", error);
         });
     }
-  }, [db, document_id, forceReload]);
+  }, [db, document_id, forceReload,collection]);
   return (
     <Container
       style={{
@@ -221,7 +179,7 @@ const ReplyChannel = ({ db, name, document_id, collection }) => {
         display: "block",
         justifyContent: "center",
         alignContent: "center",
-        maxWidth: "53vw",
+        maxWidth: "55.2vw",
         padding: 2,
       }}
       component="main"

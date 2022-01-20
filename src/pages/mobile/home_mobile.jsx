@@ -14,7 +14,6 @@ import { useDispatch } from "react-redux";
 import { setSnackbarOpen,setforceReload } from "../../redux/actions";
 import { getRequest } from "../../utils/axiosRequests";
 import axios from 'axios'
-import { maxWidth } from "@mui/system";
 
 const useStyles = makeStyles(theme => ({
   root: {

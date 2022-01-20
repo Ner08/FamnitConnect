@@ -14,8 +14,6 @@ import SendIcon from "@mui/icons-material/Send";
 import Paper from "@mui/material/Paper";
 import { useParams } from 'react-router';
 
-import { useDispatch } from "react-redux";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -116,14 +114,8 @@ const db = firebase.firestore();
 
 export default function Home({ match }) {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const [snackbarSuccessText, setSnackbarSuccessText] = React.useState("");
-  const [snackbarErrorText, setSnackbarErrorText] = React.useState("");
   const [input, setInput] = React.useState("");
   const name = useSelector((state) => state.setNickname);
-  const uuid = useSelector((state) => state.setUuid);
-  const reload = useSelector((state) => state.forceReload4);
-  const [value, setValue] = React.useState(true);
 
   const {subjectName} = useParams();
 

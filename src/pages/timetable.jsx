@@ -190,7 +190,7 @@ class App extends React.PureComponent {
         return { data };
       }
       if (added) {
-        if (added.allDay == true) {
+        if (added.allDay === true) {
           console.log("full day events aren't implemented");
           this.setState({ varVisibility: "visible" });
         } else {
