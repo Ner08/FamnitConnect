@@ -214,19 +214,26 @@ export default function Home({ match }) {
             width: "100%",
             justifyContent: "center",
             alignContent: "center",
+            backgroundColor: "gray"
           }}
         >
           <div
             style={{
               display: "flex",
               flexDirection: "row",
-              width: "90vw",
+              width: "100vw",
               position: "absolute",
-              bottom: 10,
-              zIndex:1
+              bottom: 0,
+              paddingBottom:10,
+              paddingTop:10,
+              borderRadius:2,
+              zIndex:1,
+              justifyContent: "center",
+            alignContent: "center",
+            backgroundColor: "#484848"
             }}
           >
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "70vw",}}>
               <ThemeProvider theme={theme}>
                 <TextField
                   InputProps={{

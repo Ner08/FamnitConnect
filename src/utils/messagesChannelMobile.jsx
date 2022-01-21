@@ -17,6 +17,37 @@ function getWindowDimensions() {
   };
 }
 
+function scrollWheelHeight(height) {
+  switch (true) {
+    case 845 < height:
+      return "76vh";
+    case 845 > height && height > 795:
+      return "75vh";
+    case 795 > height && height > 745:
+      return "74vh";
+    case 745 > height && height > 695:
+      return "72vh";
+    case 695 > height && height > 645:
+      return "71vh";
+    case 645 > height && height > 600:
+      return "68vh";
+    case 600 > height && height > 550:
+      return "65vh";
+    case 550 > height && height > 500:
+      return "63vh";
+    case 500 > height && height > 450:
+      return "59vh";
+    case 450 > height && height > 400:
+      return "55vh";
+    case 400 > height && height > 385:
+      return "51vh";
+    case 385 > height && height > 300:
+      return "45vh";
+    case 300 > height && height > 250:
+      return "43vh";
+  }
+}
+
 const Channel = ({ db, name, collection }) => {
   console.log("name:", name);
   const [messages, setMessages] = useState([]);
@@ -24,8 +55,12 @@ const Channel = ({ db, name, collection }) => {
   const [windowDimensions, setWindowDimensions] = useState(
     getWindowDimensions()
   );
+  const [heightScrollwheal, setHeightScrollwheal] = useState(
+    scrollWheelHeight(getWindowDimensions().height)
+  );
 
   console.log("window dimensions", windowDimensions);
+  console.log("height scrollwheal", heightScrollwheal);
   console.log("messages", messages);
 
   const messageList = () => {
@@ -154,6 +189,7 @@ const Channel = ({ db, name, collection }) => {
   useEffect(() => {
     function handleResize() {
       setWindowDimensions(getWindowDimensions());
+      setHeightScrollwheal(scrollWheelHeight(getWindowDimensions().height));
     }
 
     window.addEventListener("resize", handleResize);
@@ -177,7 +213,7 @@ const Channel = ({ db, name, collection }) => {
   }, [db, collection, messages]);
   return (
     <Container
-    keyboardShouldPersistTaps={'handled'}
+      keyboardShouldPersistTaps={"handled"}
       style={{
         marginTop: "2vh",
         display: "block",
@@ -192,8 +228,8 @@ const Channel = ({ db, name, collection }) => {
         <Scrollbars
           width={"100%"}
           autoHeight
-          autoHeightMin={(windowDimensions.height>645) ? "71vh" : "60vh"}
-          autoHeightMax={(windowDimensions.height>645) ? "71vh" : "60vh"}
+          autoHeightMin={heightScrollwheal}
+          autoHeightMax={heightScrollwheal}
           style={{ borderRadius: 6 }}
         >
           <List
