@@ -84,7 +84,7 @@ export default function Home() {
         </Typography>
         <GoogleLogin
           className={classes.googleLogin}
-          clientId="379152426926-je507stqaevp3i0dcodlifpk8jkpbptb.apps.googleusercontent.com"
+          clientId="699004932205-90j71s92k1ccgrfq63f93efimrbot4jl.apps.googleusercontent.com"
           onSuccess={response => {
             actionCreator();
             responseGoogle(response);
