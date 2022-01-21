@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Container } from "@material-ui/core";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -6,7 +6,6 @@ import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import Scrollbars from "react-custom-scrollbars";
 import { useSelector } from "react-redux";
-
 
 const ReplyChannel = ({ db, name, document_id, collection }) => {
   const [replies, setReplies] = useState([]);
@@ -133,7 +132,6 @@ const ReplyChannel = ({ db, name, document_id, collection }) => {
   useEffect(() => {
     if (forceReload) {
       const docRef = db.collection(collection).doc(document_id);
-
       docRef
         .get("reply")
         .then((doc) => {
@@ -172,12 +170,23 @@ const ReplyChannel = ({ db, name, document_id, collection }) => {
           console.log("Error getting document:", error);
         });
     }
-  }, [db, document_id, forceReload,collection]);
+  }, [db, document_id, forceReload, collection]);
   return (
     <div>
-        <Typography style={{textAlign:"center",backgroundColor:"gray",width:"75vw",margin:"auto",borderRadius:5,marginBottom:-2,fontFamily: "Signika",fontSize:13}}>
-            REPLIES
-            </Typography>
+      <Typography
+        style={{
+          textAlign: "center",
+          backgroundColor: "gray",
+          width: "75vw",
+          margin: "auto",
+          borderRadius: 5,
+          marginBottom: -2,
+          fontFamily: "Signika",
+          fontSize: 13,
+        }}
+      >
+        REPLIES
+      </Typography>
       <Container
         style={{
           marginTop: 0,

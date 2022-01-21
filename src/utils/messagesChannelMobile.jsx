@@ -155,7 +155,9 @@ const Channel = ({ db, name, collection }) => {
           console.log("messages: ", messages);
           setMessages(data);
         });
-      return unsubscribe;
+        setTimeout(()=>{
+          unsubscribe();
+     }, 5000);
     }
   }, [db,collection,messages]);
   return (

@@ -298,7 +298,8 @@ export default function Home({ match }) {
               flexDirection: "row",
               width: "90vw",
               position: "absolute",
-              bottom: 10,
+              bottom: 0,
+              zIndex:1
             }}
           >
             <div style={{ width: "100%" }}>
