@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Container } from "@material-ui/core";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -14,7 +14,7 @@ const Channel = ({ db, name, collection }) => {
   const [messages, setMessages] = useState([]);
   const dispatch = useDispatch();
 
-  console.log("messages",messages)
+  console.log("messages", messages);
 
   const messageList = () => {
     if (JSON.stringify(messages) === "[]") {
@@ -62,102 +62,120 @@ const Channel = ({ db, name, collection }) => {
           />
         </ListItem>
       );
-    }
-    else{
-    return messages
-      .slice(0)
-      .reverse()
-      .map((message) => (
-        <div id="forumButtons" style={{ cursor: "pointer", width: "100%" }}>
-          <ListItem
-            key={message.id}
-            alignItems="flex-start"
-            onClick={() => dispatch(replies(message.reply))}
-            component={Link}
-            to={`/reply/${collection}/${message.id}/${message.name}/${message.text}/${message.createdAt}`}
-          >
-            <ListItemText
-              disableTypography
-              primary={
-                <Typography
-                  type="body1"
-                  style={{
-                    fontFamily: "Signika",
-                    color: "#125845",
-                    fontWeight: "bold",
-                    marginLeft: -1,
-                  }}
-                >
-                  {message.name}
-                </Typography>
-              }
-              secondary={
-                <React.Fragment>
+    } else {
+      return messages
+        .slice(0)
+        .reverse()
+        .map((message) => (
+          <div id={message.id+"forumButtons"} style={{ cursor: "pointer", width: "100%" }}>
+            <ListItem
+              key={message.id}
+              alignItems="flex-start"
+              onClick={() => dispatch(replies(message.reply))}
+              component={Link}
+              to={`/reply/${collection}/${message.id}/${message.name}/${message.text}/${message.createdAt}`}
+            >
+              <ListItemText
+                disableTypography
+                primary={
                   <Typography
+                    type="body1"
                     style={{
-                      color: "white",
                       fontFamily: "Signika",
-                      wordBreak: "break-all",
-                      hyphens: "manual",
-                      fontWeight: "normal",
+                      color: "#125845",
+                      fontWeight: "bold",
+                      marginLeft: -1,
                     }}
-                    component="span"
-                    variant="body2"
                   >
-                    {message.text}
+                    {message.name}
                   </Typography>
-                </React.Fragment>
-              }
-            />
-            <ListItemText
-              disableTypography
-              primary={
-                <Typography
-                  type="body1"
-                  style={{
-                    fontFamily: "Signika",
-                    color: "gray",
-                    position: "absolute",
-                    fontSize: 10,
-                    right: 15,
-                  }}
-                >
-                  {console.log(message)}
-                  {new Date(message.createdAt).toLocaleTimeString([], {
-                    year: "numeric",
-                    month: "numeric",
-                    day: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </Typography>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-        </div>
-      ));
+                }
+                secondary={
+                  <React.Fragment>
+                    <Typography
+                      style={{
+                        color: "white",
+                        fontFamily: "Signika",
+                        wordBreak: "break-all",
+                        hyphens: "manual",
+                        fontWeight: "normal",
+                      }}
+                      component="span"
+                      variant="body2"
+                    >
+                      {message.text}
+                    </Typography>
+                  </React.Fragment>
+                }
+              />
+              <ListItemText
+                disableTypography
+                primary={
+                  <Typography
+                    type="body1"
+                    style={{
+                      fontFamily: "Signika",
+                      color: "gray",
+                      position: "absolute",
+                      fontSize: 10,
+                      right: 15,
+                    }}
+                  >
+                    {console.log(message)}
+                    {new Date(message.createdAt).toLocaleTimeString([], {
+                      year: "numeric",
+                      month: "numeric",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </Typography>
+                }
+              />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+          </div>
+        ));
     }
   };
 
   useEffect(() => {
+    // -----------------OLD CODE--------------------
+    // if (db) {
+    //   const unsubscribe = db
+    //     .collection(collection)
+    //     .orderBy("createdAt")
+    //     .limitToLast(100)
+    //     .onSnapshot((querySnapshot) => {
+    //       const data = querySnapshot.docs.map((doc) => ({
+    //         ...doc.data(),
+    //         id: doc.id,
+    //       }));
+    //       console.log("data", data);
+    //       console.log("messages: ", messages);
+    //       setMessages(data);
+    //     });
+    //   return unsubscribe;
+    // }
+    //------------------------------------------------
+
     if (db) {
-      const unsubscribe = db
-        .collection(collection)
+      db.collection(collection)
         .orderBy("createdAt")
         .limitToLast(100)
-        .onSnapshot((querySnapshot) => {
-          const data = querySnapshot.docs.map((doc) => ({
+        .get()
+        .then((querySnapshot) => {
+          const tempDoc = querySnapshot.docs.map((doc) => ({
             ...doc.data(),
             id: doc.id,
           }));
-          console.log("data", data);
+          console.log(tempDoc);
+          console.log("data", tempDoc);
+          setMessages(tempDoc);
           console.log("messages: ", messages);
-          setMessages(data);
         });
-      return unsubscribe;
     }
-  }, [db,collection,messages]);
+  }, [db, collection, messages]);
   return (
     <Container
       style={{
@@ -166,7 +184,7 @@ const Channel = ({ db, name, collection }) => {
         justifyContent: "center",
         alignContent: "center",
         maxWidth: "56vw",
-        padding:2
+        padding: 2,
       }}
       component="main"
     >
@@ -176,7 +194,7 @@ const Channel = ({ db, name, collection }) => {
           autoHeight
           autoHeightMin={"70vh"}
           autoHeightMax={"70vh"}
-          style={{borderRadius:6}}
+          style={{ borderRadius: 6 }}
         >
           <List
             sx={{
@@ -186,7 +204,8 @@ const Channel = ({ db, name, collection }) => {
               marginBottom: -15,
             }}
           >
-            {messageList()}
+            
+             {messageList()} 
           </List>
         </Scrollbars>
       </div>

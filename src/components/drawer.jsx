@@ -127,6 +127,7 @@ ClippedDrawer(props) {
     dispatcher(setSubjetsSet([]))
     dispatcher(setMajorGrade(null))
     dispatcher(setMajors(null))
+    localStorage.removeItem("email")
   }
   const progressBar = () => {
     if (loading) {

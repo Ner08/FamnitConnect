@@ -67,6 +67,7 @@ export default function Home() {
     console.log(response);
     google = response;
     dispatch(email(google.profileObj.email));
+    localStorage.setItem("email", google.profileObj.email)
     console.log("Signed in!");
     console.log(google.profileObj.email);
   };

@@ -29,33 +29,41 @@ import ReplyroomMobile from "./pages/mobile/replyForum_mobile";
 import NotesMobile from "./pages/mobile/notes_mobile";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setId, nickname } from "./redux/actions";
+import { setId, nickname, email } from "./redux/actions";
 import { postRequest, getRequest } from "./utils/axiosRequests";
 import { isMobile } from "react-device-detect";
 
 export default function App() {
   const dispatch = useDispatch();
-  const email = useSelector((state) => state.newEmail);
+  const reduxEmail = useSelector((state) => state.newEmail);
   const uuid = useSelector((state) => state.setUuid);
   const subjects = useSelector((state) => state.subjectsSet);
   const [uuidSet, setUuidSet] = React.useState(false);
   const [subjectsSet, setSubjectsSet] = React.useState(false);
+  
+
+ 
 
   React.useEffect(() => {
     var userData;
     var subjectsData;
     var nickNameData;
-
+    var localEmail = localStorage.getItem("email")
+    console.log("localEmail: ", localEmail)
+    if (localEmail!==null){
+      dispatch(email(localEmail))
+    }
+    
     const postEmailGetUuid = async () => {
       userData = await postRequest(
-        "https://famnit-connect.herokuapp.com/user-info/" + email
+        "https://famnit-connect.herokuapp.com/user-info/" + reduxEmail
       );
       if (userData !== null) {
         dispatch(setId(userData.data.user_uuid));
       }
       setUuidSet(true);
     };
-    if (email !== null && uuid == null) {
+    if (reduxEmail !== null && uuid == null) {
       postEmailGetUuid();
     }
 
@@ -90,7 +98,8 @@ export default function App() {
     if (uuid !== null) {
       getNickname();
     }
-  }, [uuid, email, dispatch, subjectsSet]);
+
+  }, [uuid, reduxEmail, dispatch, subjectsSet]);
 
   let desktopRoutes;
   desktopRoutes = (
@@ -274,7 +283,7 @@ export default function App() {
   } else if (uuid !== null && !subjectsSet) {
     return subject_select;
   } else {
-    if (uuidSet && email !== null) {
+    if (uuidSet && reduxEmail !== null) {
       return famnit_varification;
     } else {
       return login;

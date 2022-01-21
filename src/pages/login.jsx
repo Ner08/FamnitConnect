@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Container, Typography, Avatar, CssBaseline, Paper } from "@material-ui/core";
 import GoogleLogin from "react-google-login";
 import { useDispatch } from "react-redux";
-import {email } from "../redux/actions";
+import { email } from "../redux/actions";
 import { useHistory } from "react-router-dom";
 import LockIcon from "@material-ui/icons/Lock";
 
@@ -67,6 +67,7 @@ export default function Home() {
     console.log(response);
     google = response;
     dispatch(email(google.profileObj.email));
+    localStorage.setItem("email", google.profileObj.email)
     console.log("Signed in!");
     console.log(google.profileObj.email);
   };

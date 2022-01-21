@@ -222,7 +222,7 @@ export default function Home({ match }) {
               flexDirection: "row",
               width: "90vw",
               position: "absolute",
-              bottom: 0,
+              bottom: 10,
               zIndex:1
             }}
           >

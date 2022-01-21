@@ -143,6 +143,7 @@ export default function DrawerContent(props) {
     dispatch(setMajors(null));
     dispatch(setDrawerStatusSettings());
     dispatch(setDrawerStatus());
+    localStorage.removeItem("email")
   };
 
   React.useEffect(() => {
