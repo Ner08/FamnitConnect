@@ -269,7 +269,7 @@ export default function Home({ match }) {
                     <CustomizedSnackbars onCloseEvent={onSnackbarClose} open={snackbarErrorText.length > 0} error text={snackbarErrorText} /> */}
         </div>
       </form>
-      <Channel db={db} name={name} key={subjectName} collection={subjectName} />
+      <Channel db={db} name={name} key={subjectName+""+JSON.stringify(forceReload)} collection={subjectName} />
       {/* <CustomizedSnackbars onCloseEvent={onSnackbarClose} open={snackbarSuccessText.length > 0} text={snackbarSuccessText} />
     <CustomizedSnackbars onCloseEvent={onSnackbarClose} open={snackbarErrorText.length > 0} error text={snackbarErrorText} /> */}
     </div>

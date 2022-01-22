@@ -53,9 +53,7 @@ const Channel = ({ db, name, collection }) => {
   console.log("name:", name);
   const [messages, setMessages] = useState([]);
   const dispatch = useDispatch();
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions()
-  );
+
   const [heightScrollwheal, setHeightScrollwheal] = useState(
     scrollWheelHeight(getWindowDimensions().height)
   );
@@ -185,7 +183,6 @@ const Channel = ({ db, name, collection }) => {
 
   useEffect(() => {
     function handleResize() {
-      setWindowDimensions(getWindowDimensions());
       setHeightScrollwheal(scrollWheelHeight(getWindowDimensions().height));
     }
     window.addEventListener("resize", handleResize);
