@@ -120,7 +120,7 @@ export default function Home({ match }) {
   const classes = useStyles();
   const [input, setInput] = React.useState("");
   const name = useSelector((state) => state.setNickname);
-
+  const [forceReload,setForceReload] = React.useState(false)
   const { subjectName } = useParams();
 
   // const source = axios.CancelToken.source();
@@ -159,6 +159,7 @@ export default function Home({ match }) {
         }
       }
       add();
+      setForceReload(!forceReload);
     }
   };
   const theme = createTheme({
