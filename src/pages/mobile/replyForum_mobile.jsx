@@ -284,25 +284,32 @@ export default function Home({ match }) {
         </ListItem>
       </Container>
       <form noValidate>
-        <div
+      <div
           style={{
             display: "flex",
             width: "100%",
             justifyContent: "center",
             alignContent: "center",
+            backgroundColor: "gray"
           }}
         >
           <div
             style={{
               display: "flex",
               flexDirection: "row",
-              width: "90vw",
+              width: "100vw",
               position: "absolute",
               bottom: 0,
-              zIndex:1
+              paddingBottom:10,
+              paddingTop:10,
+              borderRadius:2,
+              zIndex:1,
+              justifyContent: "center",
+            alignContent: "center",
+            backgroundColor: "#c2c2c2"
             }}
           >
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "70vw",}}>
               <ThemeProvider theme={theme}>
                 <TextField
                   InputProps={{
@@ -316,6 +323,7 @@ export default function Home({ match }) {
                   label="Reply"
                   name="input"
                   size="small"
+                  style={{ height: 10 }}
                   onKeyPress={(ev) => {
                     console.log(`Pressed keyCode ${ev.key}`);
                     if (ev.key === "Enter") {
@@ -330,7 +338,7 @@ export default function Home({ match }) {
             <div>
               <Button
                 variant="contained"
-                style={{ height: 40, paddingLeft: 30 }}
+                style={{ height: 40, paddingLeft: 30, backgroundColor:"#4f4f4f", color:"white"}}
                 startIcon={<SendIcon />}
                 onClick={handleOnSubmit}
               ></Button>

@@ -116,8 +116,11 @@ export default function Home({ match }) {
   const classes = useStyles();
   const [input, setInput] = React.useState("");
   const name = useSelector((state) => state.setNickname);
+  const [forceReload,setForceReload] = React.useState(false)
 
   const { subjectName } = useParams();
+
+  console.log("forceReload: ", forceReload)
 
   // const source = axios.CancelToken.source();
 
@@ -155,7 +158,9 @@ export default function Home({ match }) {
         }
       }
       add();
+      setForceReload(!forceReload);
     }
+    
   };
   const theme = createTheme({
     palette: {
@@ -230,7 +235,7 @@ export default function Home({ match }) {
               zIndex:1,
               justifyContent: "center",
             alignContent: "center",
-            backgroundColor: "#484848"
+            backgroundColor: "#c2c2c2"
             }}
           >
             <div style={{ width: "70vw",}}>
@@ -262,7 +267,7 @@ export default function Home({ match }) {
             <div>
               <Button
                 variant="contained"
-                style={{ height: 40, paddingLeft: 30 }}
+                style={{ height: 40, paddingLeft: 30, backgroundColor:"#4f4f4f", color:"white"}}
                 startIcon={<SendIcon />}
                 onClick={handleOnSubmit}
               ></Button>
@@ -272,7 +277,7 @@ export default function Home({ match }) {
                     <CustomizedSnackbars onCloseEvent={onSnackbarClose} open={snackbarErrorText.length > 0} error text={snackbarErrorText} /> */}
         </div>
       </form>
-      <Channel db={db} name={name} key={subjectName} collection={subjectName} />
+      <Channel db={db} name={name} key={subjectName+""+JSON.stringify(forceReload)} collection={subjectName} />
       {/* <CustomizedSnackbars onCloseEvent={onSnackbarClose} open={snackbarSuccessText.length > 0} text={snackbarSuccessText} />
     <CustomizedSnackbars onCloseEvent={onSnackbarClose} open={snackbarErrorText.length > 0} error text={snackbarErrorText} /> */}
     </div>

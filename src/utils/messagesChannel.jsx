@@ -14,7 +14,7 @@ const Channel = ({ db, name, collection }) => {
   const [messages, setMessages] = useState([]);
   const dispatch = useDispatch();
 
-  console.log("messages", messages);
+  console.log("messages:", JSON.stringify(messages));
 
   const messageList = () => {
     if (JSON.stringify(messages) === "[]") {
@@ -159,21 +159,23 @@ const Channel = ({ db, name, collection }) => {
     // }
     //------------------------------------------------
 
-    if (db) {
-      db.collection(collection)
-        .orderBy("createdAt")
-        .limitToLast(100)
-        .get()
-        .then((querySnapshot) => {
-          const tempDoc = querySnapshot.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }));
-          console.log(tempDoc);
-          console.log("data", tempDoc);
-          setMessages(tempDoc);
-          console.log("messages: ", messages);
-        });
+    if (JSON.stringify(messages) === "[]") {
+      if (db) {
+        db.collection(collection)
+          .orderBy("createdAt")
+          .limitToLast(50)
+          .get()
+          .then((querySnapshot) => {
+            const tempDoc = querySnapshot.docs.map((doc) => ({
+              ...doc.data(),
+              id: doc.id,
+            }));
+            console.log(tempDoc);
+            console.log("data", tempDoc);
+            setMessages(tempDoc);
+            console.log("messages: ", messages);
+          });
+      }
     }
   }, [db, collection, messages]);
   return (
