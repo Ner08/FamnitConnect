@@ -51,7 +51,7 @@ function scrollWheelHeight(height) {
 
 const Channel = ({ db, name, collection }) => {
   console.log("name:", name);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([99999]);
   const dispatch = useDispatch();
 
   const [heightScrollwheal, setHeightScrollwheal] = useState(
@@ -187,7 +187,7 @@ const Channel = ({ db, name, collection }) => {
     }
     window.addEventListener("resize", handleResize);
 
-    if (JSON.stringify(messages) === "[]") {
+    if (JSON.stringify(messages) === "[99999]") {
       if (db) {
         db.collection(collection)
           .orderBy("createdAt")

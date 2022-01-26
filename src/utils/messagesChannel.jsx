@@ -11,7 +11,7 @@ import { replies } from "../redux/actions";
 
 const Channel = ({ db, name, collection }) => {
   console.log("name:", name);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([99999]);
   const dispatch = useDispatch();
 
   console.log("messages:", JSON.stringify(messages));
@@ -159,7 +159,7 @@ const Channel = ({ db, name, collection }) => {
     // }
     //------------------------------------------------
 
-    if (JSON.stringify(messages) === "[]") {
+    if (JSON.stringify(messages) === "[99999]") {
       if (db) {
         db.collection(collection)
           .orderBy("createdAt")
