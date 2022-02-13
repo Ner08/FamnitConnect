@@ -111,9 +111,16 @@ export default function Home() {
     setGrade(grade + 1)
   };
 
+
+  function SortArray(x, y){
+    if (x.course_name < y.course_name) {return -1;}
+    if (x.course_name > y.course_name) {return 1;}
+    return 0;
+}
+
   const inSelectSubjects = () => {
     console.log(grade)
-    return subjects.map(function (data, i) {
+    return subjects.sort(SortArray).map(function (data, i) {
       return (
         <FormControlLabel
           key={i}
